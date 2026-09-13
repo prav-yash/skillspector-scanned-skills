@@ -1,0 +1,889 @@
+{
+  "skill": {
+    "name": "pdf",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\pdf",
+    "scanned_at": "2026-08-25T08:14:20.174954+00:00"
+  },
+  "risk_assessment": {
+    "score": 23,
+    "severity": "MEDIUM",
+    "recommendation": "CAUTION"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 1497
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 314,
+      "executable": false,
+      "size_bytes": 8386
+    },
+    {
+      "path": "forms.md",
+      "type": "markdown",
+      "lines": 294,
+      "executable": false,
+      "size_bytes": 12148
+    },
+    {
+      "path": "reference.md",
+      "type": "markdown",
+      "lines": 612,
+      "executable": false,
+      "size_bytes": 17303
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "type": "python",
+      "lines": 65,
+      "executable": true,
+      "size_bytes": 2839
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "type": "python",
+      "lines": 11,
+      "executable": true,
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "type": "python",
+      "lines": 33,
+      "executable": true,
+      "size_bytes": 1041
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "type": "python",
+      "lines": 37,
+      "executable": true,
+      "size_bytes": 1295
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "type": "python",
+      "lines": 122,
+      "executable": true,
+      "size_bytes": 4422
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "type": "python",
+      "lines": 115,
+      "executable": true,
+      "size_bytes": 4060
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "type": "python",
+      "lines": 98,
+      "executable": true,
+      "size_bytes": 3917
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "type": "python",
+      "lines": 107,
+      "executable": true,
+      "size_bytes": 3342
+    }
+  ],
+  "issues": [
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-b5210f22372c4571abc4c22daf3ad899",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 216,
+        "end_line": 216
+      },
+      "finding": null,
+      "explanation": "The example command hardcodes a password in the command line, which can be exposed via process lists (e.g., `ps` command) and shell history, leading to credential theft.",
+      "remediation": "Add a clear warning above the example: '**WARNING:** Hardcoding passwords in command line arguments is insecure as they may be visible in process lists and shell history. Use a password file or prompt the user securely instead.' Consider providing a secure alternative example if possible (e.g., using a temporary file with restricted permissions or environment variables).",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-bad452d49a3d41c9b57557b051a29a2d",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "location": {
+        "file": "reference.md",
+        "start_line": 27,
+        "end_line": 27
+      },
+      "finding": null,
+      "explanation": "The markdown file contains examples of file write operations (e.g., saving images, PDFs) without any warnings about potential data loss from overwriting existing files. While examples use fixed filenames like 'page_1.png', the description omits cautions about backing up files or using unique names, posing a risk to user data integrity.",
+      "remediation": "Add a general warning in the introduction or near code examples advising users to use unique filenames, back up data, or exercise caution when running examples that write to disk.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-1",
+      "finding_id": "finding-3305fdf8130d447ba321e7c6f1591cc2",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.9,
+      "location": {
+        "file": "reference.md",
+        "start_line": 1,
+        "end_line": 1
+      },
+      "finding": null,
+      "explanation": "The file is a reference guide, not a skill manifest, and contains no trigger phrases or activation conditions for skill invocation. All examples are illustrative and clearly labeled as such, with no ambiguous phrases that could cause unintended invocations.",
+      "remediation": "No action needed.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-3",
+      "finding_id": "finding-0e61894173f64081897140a65eafc979",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.9,
+      "location": {
+        "file": "reference.md",
+        "start_line": 1,
+        "end_line": 1
+      },
+      "finding": null,
+      "explanation": "The document uses English consistently in explanations and code comments/examples, but does not force language/locale on users without opt-in. Examples show English log/output messages, but these are illustrative and not indicative of enforced behavior. No evidence of language policy violations (e.g., forced localization without user choice) was found.",
+      "remediation": "No action needed.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6545,
+        "completion_tokens": 1275,
+        "total_tokens": 7820
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1513,
+        "completion_tokens": 120,
+        "total_tokens": 1633
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 8672,
+        "completion_tokens": 1204,
+        "total_tokens": 9876
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1485,
+        "completion_tokens": 409,
+        "total_tokens": 1894
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1531,
+        "completion_tokens": 1148,
+        "total_tokens": 2679
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2719,
+        "completion_tokens": 1124,
+        "total_tokens": 3843
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1184,
+        "completion_tokens": 954,
+        "total_tokens": 2138
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2416,
+        "completion_tokens": 1395,
+        "total_tokens": 3811
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2647,
+        "completion_tokens": 2669,
+        "total_tokens": 5316
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2458,
+        "completion_tokens": 1204,
+        "total_tokens": 3662
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5666,
+        "completion_tokens": 1235,
+        "total_tokens": 6901
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2034,
+        "completion_tokens": 2002,
+        "total_tokens": 4036
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4956,
+        "completion_tokens": 8042,
+        "total_tokens": 12998
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1506,
+        "completion_tokens": 243,
+        "total_tokens": 1749
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2027,
+        "completion_tokens": 1160,
+        "total_tokens": 3187
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2712,
+        "completion_tokens": 2098,
+        "total_tokens": 4810
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2640,
+        "completion_tokens": 2335,
+        "total_tokens": 4975
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2451,
+        "completion_tokens": 1929,
+        "total_tokens": 4380
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4949,
+        "completion_tokens": 3334,
+        "total_tokens": 8283
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5659,
+        "completion_tokens": 1968,
+        "total_tokens": 7627
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1524,
+        "completion_tokens": 2309,
+        "total_tokens": 3833
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1478,
+        "completion_tokens": 2098,
+        "total_tokens": 3576
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2409,
+        "completion_tokens": 1767,
+        "total_tokens": 4176
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 8665,
+        "completion_tokens": 5184,
+        "total_tokens": 13849
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1177,
+        "completion_tokens": 395,
+        "total_tokens": 1572
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1047,
+        "completion_tokens": 159,
+        "total_tokens": 1206
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4490,
+        "completion_tokens": 300,
+        "total_tokens": 4790
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5200,
+        "completion_tokens": 741,
+        "total_tokens": 5941
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 8206,
+        "completion_tokens": 990,
+        "total_tokens": 9196
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1568,
+        "completion_tokens": 167,
+        "total_tokens": 1735
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 718,
+        "completion_tokens": 117,
+        "total_tokens": 835
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1019,
+        "completion_tokens": 1981,
+        "total_tokens": 3000
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1065,
+        "completion_tokens": 121,
+        "total_tokens": 1186
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2253,
+        "completion_tokens": 108,
+        "total_tokens": 2361
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2181,
+        "completion_tokens": 173,
+        "total_tokens": 2354
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1950,
+        "completion_tokens": 188,
+        "total_tokens": 2138
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1992,
+        "completion_tokens": 1934,
+        "total_tokens": 3926
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 990,
+        "completion_tokens": 838,
+        "total_tokens": 1828
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1542,
+        "completion_tokens": 5306,
+        "total_tokens": 6848
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3398,
+        "completion_tokens": 3252,
+        "total_tokens": 6650
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": false,
+  "analysis_completeness": {
+    "total_components": 12,
+    "scanned_components": 12,
+    "coverage_percent": 100.0,
+    "is_complete": false,
+    "execution_successful": false,
+    "fully_inspected_files": 12,
+    "partially_inspected_files": 0,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [
+      {
+        "outcome": "failed",
+        "phase": "meta",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "reference.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "meta_analyzer"
+        ],
+        "error_class": "OpenAITimeoutError"
+      }
+    ],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "failed",
+        "planned_work": 4,
+        "completed": 3,
+        "skipped": 0,
+        "failed": 1,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [
+      "Analyzer meta_analyzer status: failed."
+    ],
+    "findings_before_filtering": 9,
+    "findings_after_filtering": 4
+  }
+}

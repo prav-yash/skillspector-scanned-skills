@@ -1,0 +1,21 @@
+{
+  "skill_name": "custom-pc-build-expert",
+  "purpose": "Personal custom PC build recommendation skill with tool-calling guidance.",
+  "allowed_tools": [
+    "Tavily",
+    "WebFetch",
+    "Calculator",
+    "Read"
+  ],
+  "use_cases": [
+    "custom PC builds",
+    "gaming PC builds",
+    "workstation builds",
+    "AI/ML PC guidance",
+    "component compatibility",
+    "budget calculation",
+    "brand comparison",
+    "upgrade planning"
+  ],
+  "safety_boundary": "Do not invent current prices/availability; use current sources when needed. Avoid unsafe electrical or destructive hardware advice."
+}

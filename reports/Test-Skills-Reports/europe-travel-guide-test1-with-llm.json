@@ -1,0 +1,558 @@
+{
+  "skill": {
+    "name": "europe-travel-guide",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\skills\\europe-travel-guide",
+    "scanned_at": "2026-08-31T07:19:51.595191+00:00"
+  },
+  "risk_assessment": {
+    "score": 4,
+    "severity": "LOW",
+    "recommendation": "CAUTION"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 5,
+      "executable": false,
+      "size_bytes": 136
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 178,
+      "executable": false,
+      "size_bytes": 4568
+    },
+    {
+      "path": "references/examples.md",
+      "type": "markdown",
+      "lines": 38,
+      "executable": false,
+      "size_bytes": 1084
+    },
+    {
+      "path": "references/planning-reference.md",
+      "type": "markdown",
+      "lines": 48,
+      "executable": false,
+      "size_bytes": 1673
+    },
+    {
+      "path": "references/tavily-tool-usage.md",
+      "type": "markdown",
+      "lines": 14,
+      "executable": false,
+      "size_bytes": 565
+    },
+    {
+      "path": "skill-info.json",
+      "type": "json",
+      "lines": 21,
+      "executable": false,
+      "size_bytes": 686
+    }
+  ],
+  "issues": [
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-10773e9c007743639b88a91f39103e09",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.85,
+      "location": {
+        "file": "references/tavily-tool-usage.md",
+        "start_line": 1,
+        "end_line": 12
+      },
+      "finding": null,
+      "explanation": "The markdown file describes using Tavily for travel information but does not warn users that their queries may be sent to an external service, which could affect privacy.",
+      "remediation": "Add a note advising users to avoid sharing personally identifiable or sensitive information when using Tavily, or reference the Tavily privacy policy.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": false,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1510,
+        "completion_tokens": 86,
+        "total_tokens": 1596
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1645,
+        "completion_tokens": 139,
+        "total_tokens": 1784
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1234,
+        "completion_tokens": 147,
+        "total_tokens": 1381
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1301,
+        "completion_tokens": 246,
+        "total_tokens": 1547
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3037,
+        "completion_tokens": 241,
+        "total_tokens": 3278
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1090,
+        "completion_tokens": 1115,
+        "total_tokens": 2205
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1659,
+        "completion_tokens": 1540,
+        "total_tokens": 3199
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1315,
+        "completion_tokens": 1331,
+        "total_tokens": 2646
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1524,
+        "completion_tokens": 1649,
+        "total_tokens": 3173
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3051,
+        "completion_tokens": 2197,
+        "total_tokens": 5248
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1248,
+        "completion_tokens": 1601,
+        "total_tokens": 2849
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 645,
+        "completion_tokens": 195,
+        "total_tokens": 840
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2592,
+        "completion_tokens": 91,
+        "total_tokens": 2683
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1065,
+        "completion_tokens": 231,
+        "total_tokens": 1296
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1200,
+        "completion_tokens": 54,
+        "total_tokens": 1254
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 789,
+        "completion_tokens": 204,
+        "total_tokens": 993
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 856,
+        "completion_tokens": 52,
+        "total_tokens": 908
+      }
+    ],
+    "llm_calls_attempted": 4,
+    "llm_calls_succeeded": 3
+  },
+  "execution_successful": false,
+  "analysis_completeness": {
+    "total_components": 6,
+    "scanned_components": 5,
+    "coverage_percent": 83.3,
+    "is_complete": false,
+    "execution_successful": false,
+    "fully_inspected_files": 5,
+    "partially_inspected_files": 1,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "LICENSE.txt",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIAPIError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "meta",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "references/tavily-tool-usage.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "meta_analyzer"
+        ],
+        "error_class": "OpenAITimeoutError"
+      }
+    ],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "failed",
+        "planned_work": 1,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 1,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "failed",
+        "planned_work": 6,
+        "completed": 5,
+        "skipped": 0,
+        "failed": 1,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [
+      "Analyzer semantic_quality_policy status: failed.",
+      "Analyzer meta_analyzer status: failed."
+    ],
+    "findings_before_filtering": 1,
+    "findings_after_filtering": 1
+  }
+}

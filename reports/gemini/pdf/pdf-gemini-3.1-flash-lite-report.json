@@ -1,0 +1,925 @@
+{
+  "skill": {
+    "name": "pdf",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\pdf",
+    "scanned_at": "2026-08-25T12:34:32.320459+00:00"
+  },
+  "risk_assessment": {
+    "score": 38,
+    "severity": "MEDIUM",
+    "recommendation": "CAUTION"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 1497
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 314,
+      "executable": false,
+      "size_bytes": 8386
+    },
+    {
+      "path": "forms.md",
+      "type": "markdown",
+      "lines": 294,
+      "executable": false,
+      "size_bytes": 12148
+    },
+    {
+      "path": "reference.md",
+      "type": "markdown",
+      "lines": 612,
+      "executable": false,
+      "size_bytes": 17303
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "type": "python",
+      "lines": 65,
+      "executable": true,
+      "size_bytes": 2839
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "type": "python",
+      "lines": 11,
+      "executable": true,
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "type": "python",
+      "lines": 33,
+      "executable": true,
+      "size_bytes": 1041
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "type": "python",
+      "lines": 37,
+      "executable": true,
+      "size_bytes": 1295
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "type": "python",
+      "lines": 122,
+      "executable": true,
+      "size_bytes": 4422
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "type": "python",
+      "lines": 115,
+      "executable": true,
+      "size_bytes": 4060
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "type": "python",
+      "lines": 98,
+      "executable": true,
+      "size_bytes": 3917
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "type": "python",
+      "lines": 107,
+      "executable": true,
+      "size_bytes": 3342
+    }
+  ],
+  "issues": [
+    {
+      "id": "LP3",
+      "finding_id": "finding-30d74a3f42824fc09143ae91b1dd05c4",
+      "category": "MCP Least Privilege",
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.9,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "The skill lacks defined tool scope permissions while performing arbitrary file read and write operations. Without strict scoping, an attacker could manipulate the agent to read sensitive system files or overwrite critical application files.",
+      "remediation": "Add an 'allowed-tools' section to the skill metadata that restricts file access to specific, non-sensitive directories only. Implement sandboxing to prevent the agent from accessing files outside of the user's workspace.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02"
+      ]
+    },
+    {
+      "id": "SDI-2",
+      "finding_id": "finding-b533c049a1e743c79c839f28d037771b",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "location": {
+        "file": "reference.md",
+        "start_line": 591,
+        "end_line": 601
+      },
+      "finding": null,
+      "explanation": "The implementation of OCR functionality introduces a dependency on external system tools like 'pytesseract' and 'poppler-utils'. This can lead to uncontrolled execution of external binaries or potentially resource exhaustion if unvalidated PDF files trigger intensive OCR processing.",
+      "remediation": "Restrict the use of OCR to trusted inputs only, sanitize the input PDF file to prevent malicious formatting, and ensure that the external dependencies are explicitly declared and limited in the manifest/sandbox environment.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-662d1531759041a29795d44ee90ea513",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.9,
+      "location": {
+        "file": "reference.md",
+        "start_line": 500,
+        "end_line": 501
+      },
+      "finding": null,
+      "explanation": "The documentation provides a command (qpdf --replace-input) that performs in-place modification and destruction of the input file without warning the user. This poses a risk of accidental data loss or integrity compromise if the file is overwritten incorrectly.",
+      "remediation": "Update the documentation to warn users about the destructive nature of the '--replace-input' flag and recommend creating a backup copy before executing the repair command.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-4c5c9eb2f38f455b81d592e2596b94c4",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "location": {
+        "file": "scripts/convert_pdf_to_images.py",
+        "start_line": 21,
+        "end_line": 21
+      },
+      "finding": null,
+      "explanation": "The script performs file write operations (saving images to a directory) based on user-provided input paths without validating the output directory or warning the user. An attacker could potentially use this to overwrite existing files on the system if they control the 'output_dir' argument.",
+      "remediation": "Validate that the output directory is within a safe, expected sandbox location. Implement checks to ensure the script does not overwrite sensitive existing files, and prompt the user for confirmation if a collision is detected.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SDI-2",
+      "finding_id": "finding-062b5e34d4104ee3afe57213c7782fb4",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "location": {
+        "file": "scripts/create_validation_image.py",
+        "start_line": 9,
+        "end_line": 26
+      },
+      "finding": null,
+      "explanation": "The script performs arbitrary file path operations for image processing which fall outside the stated scope of PDF management. Using external inputs like 'input_path' and 'output_path' directly in image operations could lead to path traversal or resource exhaustion vulnerabilities if the inputs are not strictly validated.",
+      "remediation": "Restrict the input and output paths to a dedicated sandbox directory. Implement strict validation to ensure 'input_path' points only to authorized image formats and 'output_path' prevents overwriting sensitive system or application files.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-13c8ddb9ad444c4aa1a90925e772aedf",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "location": {
+        "file": "scripts/extract_form_field_info.py",
+        "start_line": 113,
+        "end_line": 114
+      },
+      "finding": null,
+      "explanation": "The script uses the open(json_output_path, 'w') function, which overwrites any existing file at the specified path without checking for its existence or prompting the user for confirmation. This can lead to unintended data loss if an attacker or automated process provides a sensitive file path as the output argument.",
+      "remediation": "Check if the output file already exists using os.path.exists() before opening it, or use a library to generate unique temporary file names. Alternatively, raise an error if the destination file exists and require the user to explicitly specify a different path.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 7258,
+        "completion_tokens": 156,
+        "total_tokens": 7414
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1568,
+        "completion_tokens": 9,
+        "total_tokens": 1577
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1212,
+        "completion_tokens": 9,
+        "total_tokens": 1221
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1526,
+        "completion_tokens": 9,
+        "total_tokens": 1535
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5181,
+        "completion_tokens": 184,
+        "total_tokens": 5365
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1633,
+        "completion_tokens": 193,
+        "total_tokens": 1826
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9186,
+        "completion_tokens": 213,
+        "total_tokens": 9399
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1639,
+        "completion_tokens": 9,
+        "total_tokens": 1648
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2852,
+        "completion_tokens": 9,
+        "total_tokens": 2861
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2180,
+        "completion_tokens": 9,
+        "total_tokens": 2189
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6024,
+        "completion_tokens": 9,
+        "total_tokens": 6033
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5187,
+        "completion_tokens": 9,
+        "total_tokens": 5196
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3010,
+        "completion_tokens": 173,
+        "total_tokens": 3183
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1574,
+        "completion_tokens": 186,
+        "total_tokens": 1760
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9192,
+        "completion_tokens": 170,
+        "total_tokens": 9362
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1026,
+        "completion_tokens": 5,
+        "total_tokens": 1031
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2504,
+        "completion_tokens": 9,
+        "total_tokens": 2513
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2346,
+        "completion_tokens": 9,
+        "total_tokens": 2355
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2135,
+        "completion_tokens": 5,
+        "total_tokens": 2140
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2172,
+        "completion_tokens": 9,
+        "total_tokens": 2181
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1931,
+        "completion_tokens": 284,
+        "total_tokens": 2215
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 971,
+        "completion_tokens": 273,
+        "total_tokens": 1244
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 893,
+        "completion_tokens": 264,
+        "total_tokens": 1157
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3382,
+        "completion_tokens": 416,
+        "total_tokens": 3798
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gemini-3.1-flash-lite",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6108,
+        "completion_tokens": 431,
+        "total_tokens": 6539
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": false,
+  "analysis_completeness": {
+    "total_components": 12,
+    "scanned_components": 0,
+    "coverage_percent": 0.0,
+    "is_complete": false,
+    "execution_successful": false,
+    "fully_inspected_files": 0,
+    "partially_inspected_files": 12,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "LICENSE.txt",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "SKILL.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "forms.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "reference.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/check_bounding_boxes.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/check_fillable_fields.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy",
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/convert_pdf_to_images.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/create_validation_image.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/extract_form_field_info.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/extract_form_structure.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/fill_fillable_fields.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/fill_pdf_form_with_annotations.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      }
+    ],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "completed",
+        "planned_work": 5,
+        "completed": 5,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 6,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 4,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 5,
+        "skipped": 0,
+        "failed": 7,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [
+      "Analyzer semantic_developer_intent status: failed.",
+      "Analyzer semantic_quality_policy status: failed.",
+      "Analyzer semantic_security_discovery status: failed."
+    ],
+    "findings_before_filtering": 7,
+    "findings_after_filtering": 6
+  }
+}

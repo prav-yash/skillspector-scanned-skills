@@ -1,0 +1,82 @@
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: default) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: mcp_least_privilege) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: mcp_rug_pull) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: mcp_tool_poisoning) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: semantic_developer_intent) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: semantic_quality_policy) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: semantic_security_discovery) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'gemini-3.5-flash-lite' (slot: meta_analyzer) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+Running scan...
+DEBUG [skillspector.cli] Scan started: input_path=D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\healthcare-insurance-advisory-india, format=json, use_llm=True
+INFO [skillspector.nodes.analyzers.behavioral_ast] behavioral_ast: 0 findings
+INFO [skillspector.nodes.analyzers.behavioral_taint_tracking] behavioral_taint_tracking: 0 findings
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP1 produced 0 static findings
+INFO [skillspector.nodes.analyzers.mcp_least_privilege] mcp_least_privilege: no executable files, skipping
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP2 produced 0 static findings
+INFO [skillspector.nodes.analyzers.mcp_tool_poisoning] mcp_tool_poisoning: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP3 produced 0 static findings
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+INFO [skillspector.nodes.analyzers.static_patterns_agent_snooping] static_patterns_agent_snooping: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_deserialization] static_patterns_deserialization: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+DEBUG [skillspector.nodes.analyzers.static_runner] Filtered documentation-context finding: AR2 in references/safety-guardrails.md:36
+INFO [skillspector.nodes.analyzers.static_patterns_excessive_agency] static_patterns_excessive_agency: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+INFO [skillspector.nodes.analyzers.static_patterns_harmful_content] static_patterns_harmful_content: 0 findings
+INFO [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: 0 findings in total
+INFO [skillspector.nodes.analyzers.static_patterns_data_exfiltration] static_patterns_data_exfiltration: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'gemini-3.5-flash-lite' — using 128000-token default. Add the model to model_registry.yaml.
+INFO [skillspector.nodes.analyzers.static_patterns_output_handling] static_patterns_output_handling: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_memory_poisoning] static_patterns_memory_poisoning: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_privilege_escalation] static_patterns_privilege_escalation: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_anti_refusal] static_patterns_anti_refusal: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_prompt_injection] static_patterns_prompt_injection: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_rogue_agent] static_patterns_rogue_agent: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_ssrf] static_patterns_ssrf: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_system_prompt_leakage] static_patterns_system_prompt_leakage: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_tool_misuse] static_patterns_tool_misuse: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_supply_chain] static_patterns_supply_chain: 0 findings
+INFO [skillspector.nodes.analyzers.static_yara] static_yara: compiled 5 YARA rule file(s) (0 skipped)
+INFO [skillspector.nodes.analyzers.static_yara] static_yara: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~2899, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3343, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/buying-guidance.md (tokens~2326, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/claims-and-irdai.md (tokens~2450, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/official-sources.md (tokens~1994, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/rejections-and-grievance.md (tokens~2376, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/safety-guardrails.md (tokens~2297, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3447, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/buying-guidance.md (tokens~2430, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/claims-and-irdai.md (tokens~2553, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/official-sources.md (tokens~2097, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/rejections-and-grievance.md (tokens~2480, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/safety-guardrails.md (tokens~2400, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/buying-guidance.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/safety-guardrails.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/rejections-and-grievance.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/buying-guidance.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/buying-guidance.md (tokens~1882, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/buying-guidance.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/claims-and-irdai.md (tokens~2006, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/claims-and-irdai.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/safety-guardrails.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/claims-and-irdai.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/official-sources.md (tokens~1550, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/rejections-and-grievance.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/official-sources.md
+INFO [skillspector.nodes.analyzers.semantic_developer_intent] semantic_developer_intent: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/claims-and-irdai.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/official-sources.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/rejections-and-grievance.md (tokens~1932, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/rejections-and-grievance.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: references/safety-guardrails.md (tokens~1853, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: references/safety-guardrails.md
+INFO [skillspector.nodes.analyzers.semantic_security_discovery] semantic_security_discovery: 0 findings
+WARNING [skillspector.llm_analyzer_base] LLM batch failed for File: references/official-sources.md: Request timed out.
+INFO [skillspector.nodes.analyzers.semantic_quality_policy] semantic_quality_policy: 0 findings
+DEBUG [skillspector.nodes.report] Report generated: format=json, findings_count=0, suppressed_count=0

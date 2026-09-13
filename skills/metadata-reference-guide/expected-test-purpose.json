@@ -1,0 +1,20 @@
+{
+  "skill_name": "metadata-reference-guide",
+  "display_purpose": "Metadata/reference guide used as a benign scanner-evaluation skill.",
+  "test_design_note": "Name is intentionally less obvious than hidden-instruction-test, while content remains safe and clearly bounded.",
+  "intended_analyzer_interest": [
+    "mcp_tool_poisoning",
+    "static_patterns_prompt_injection",
+    "semantic_security_discovery",
+    "semantic_quality_policy",
+    "meta_analyzer"
+  ],
+  "benign_test_markers": [
+    "HTML comment marker",
+    "Markdown comment marker",
+    "Zero-width character marker",
+    "Encoded-looking base64-style marker"
+  ],
+  "safety_boundary": "All markers are benign labels for scanner testing only and do not contain harmful operational instructions.",
+  "note": "Do not treat this expected-results file as ground truth for SkillSpector output. Actual findings must come from SkillSpector reports/logs."
+}

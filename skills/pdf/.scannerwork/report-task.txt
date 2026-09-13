@@ -1,0 +1,6 @@
+projectKey=academy-guide
+serverUrl=http://localhost:9000
+serverVersion=26.9.0.129388
+dashboardUrl=http://localhost:9000/dashboard?id=academy-guide
+ceTaskId=80531500-f5c3-4bd2-95ba-2c5030ff728a
+ceTaskUrl=http://localhost:9000/api/ce/task?id=80531500-f5c3-4bd2-95ba-2c5030ff728a

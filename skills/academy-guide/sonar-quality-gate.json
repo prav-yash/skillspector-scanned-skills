@@ -1,0 +1,21 @@
+﻿{
+    "projectStatus":  {
+                          "status":  "OK",
+                          "conditions":  [
+                                             {
+                                                 "status":  "OK",
+                                                 "metricKey":  "new_violations",
+                                                 "comparator":  "GT",
+                                                 "errorThreshold":  "0",
+                                                 "actualValue":  "0"
+                                             }
+                                         ],
+                          "ignoredConditions":  false,
+                          "period":  {
+                                         "mode":  "NUMBER_OF_DAYS",
+                                         "date":  "2026-09-09T10:09:46+0530",
+                                         "parameter":  "30"
+                                     },
+                          "caycStatus":  "compliant"
+                      }
+}

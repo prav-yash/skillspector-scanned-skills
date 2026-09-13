@@ -1,0 +1,923 @@
+{
+  "skill": {
+    "name": "pdf",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\pdf",
+    "scanned_at": "2026-08-24T16:27:17.837733+00:00"
+  },
+  "risk_assessment": {
+    "score": 44,
+    "severity": "MEDIUM",
+    "recommendation": "CAUTION"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 1497
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 314,
+      "executable": false,
+      "size_bytes": 8386
+    },
+    {
+      "path": "forms.md",
+      "type": "markdown",
+      "lines": 294,
+      "executable": false,
+      "size_bytes": 12148
+    },
+    {
+      "path": "reference.md",
+      "type": "markdown",
+      "lines": 612,
+      "executable": false,
+      "size_bytes": 17303
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "type": "python",
+      "lines": 65,
+      "executable": true,
+      "size_bytes": 2839
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "type": "python",
+      "lines": 11,
+      "executable": true,
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "type": "python",
+      "lines": 33,
+      "executable": true,
+      "size_bytes": 1041
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "type": "python",
+      "lines": 37,
+      "executable": true,
+      "size_bytes": 1295
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "type": "python",
+      "lines": 122,
+      "executable": true,
+      "size_bytes": 4422
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "type": "python",
+      "lines": 115,
+      "executable": true,
+      "size_bytes": 4060
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "type": "python",
+      "lines": 98,
+      "executable": true,
+      "size_bytes": 3917
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "type": "python",
+      "lines": 107,
+      "executable": true,
+      "size_bytes": 3342
+    }
+  ],
+  "issues": [
+    {
+      "id": "LP3",
+      "finding_id": "finding-88acd7e4072546c380e4e9ef3e2b2d3f",
+      "category": "MCP Least Privilege",
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.74,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "The skill contains examples that read and write local PDF files, but the metadata does not declare a least-privilege tool or filesystem scope. File I/O is expected for a PDF skill, which lowers suspicion, but the broad trigger plus unrestricted examples could lead an agent to read arbitrary user files, write outputs in unsafe locations, or overwrite files if not otherwise sandboxed.",
+      "remediation": "Add explicit permissions/allowed-tools limiting access to user-provided PDFs and a dedicated working/output directory. Disallow network access and unrestricted shell use unless required, require user confirmation for overwrites, and validate/normalize paths to prevent traversal or accidental access outside the workspace.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02"
+      ]
+    },
+    {
+      "id": "TP4",
+      "finding_id": "finding-a21358911a3f468a8a7d9cf820c5aa3e",
+      "category": "MCP Tool Poisoning",
+      "pattern": null,
+      "severity": "HIGH",
+      "confidence": 0.95,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "The code stays within the PDF domain and does not appear to access unrelated resources or perform hidden non-PDF behavior. However, the declared description substantially overstates the implemented capabilities. The actual primary functionality is PDF form inspection/filling and supporting coordinate/image utilities, not a comprehensive PDF toolkit for all listed PDF operations. Therefore the description does not accurately represent the code\u2019s behavior.",
+      "remediation": "Update the skill description to accurately reflect all capabilities, or remove undeclared functionality from the implementation.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02",
+        "AML.T0080",
+        "llm-unconfirmed"
+      ]
+    },
+    {
+      "id": "SQP-1",
+      "finding_id": "finding-7f2777e1ba4d4abeaf1a6cb1acd8c9c0",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.78,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "The trigger says to use the skill whenever a user mentions a .pdf file, even if they are not requesting PDF processing. In a PDF context this is somewhat risky because unnecessary activation can expose the agent to untrusted PDF parsing and file access paths, especially when combined with the broad file-read/write examples.",
+      "remediation": "Narrow the trigger to explicit PDF-processing requests, such as extracting, creating, modifying, OCRing, or inspecting a PDF. Add guidance to avoid opening or processing a PDF merely because it is mentioned, and to ask for confirmation before accessing files.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-99429a12c11246adac8b32bed0941e3b",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.9,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 215,
+        "end_line": 216
+      },
+      "finding": null,
+      "explanation": "The qpdf example shows removing PDF encryption/password protection without any authorization or privacy warning. Although qpdf requires the password and this is a legitimate operation in many workflows, stripping protections from PDFs can expose confidential documents or facilitate unauthorized redistribution.",
+      "remediation": "Add an authorization warning before decryption/password-removal instructions: only decrypt PDFs the user owns or is explicitly authorized to modify, do not assist with password cracking or DRM bypass, and handle passwords securely. Prefer not to place passwords directly on command lines where they may appear in shell history or process listings; use safer prompting or protected variables where available.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5396,
+        "completion_tokens": 1539,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 1187,
+        "total_tokens": 6935
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2726,
+        "completion_tokens": 150,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 133,
+        "total_tokens": 2876
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1760,
+        "completion_tokens": 102,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 85,
+        "total_tokens": 1862
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1772,
+        "completion_tokens": 465,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 448,
+        "total_tokens": 2237
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2558,
+        "completion_tokens": 224,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 207,
+        "total_tokens": 2782
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2562,
+        "completion_tokens": 543,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 526,
+        "total_tokens": 3105
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1468,
+        "completion_tokens": 243,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 226,
+        "total_tokens": 1711
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2471,
+        "completion_tokens": 243,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 226,
+        "total_tokens": 2714
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2236,
+        "completion_tokens": 208,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 191,
+        "total_tokens": 2444
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1764,
+        "completion_tokens": 166,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 149,
+        "total_tokens": 1930
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4443,
+        "completion_tokens": 4557,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 4236,
+        "total_tokens": 9000
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4740,
+        "completion_tokens": 161,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 144,
+        "total_tokens": 4901
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6947,
+        "completion_tokens": 312,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 295,
+        "total_tokens": 7259
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1768,
+        "completion_tokens": 144,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 127,
+        "total_tokens": 1912
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1000,
+        "completion_tokens": 90,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 73,
+        "total_tokens": 1090
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1260,
+        "completion_tokens": 79,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 62,
+        "total_tokens": 1339
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1308,
+        "completion_tokens": 106,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 89,
+        "total_tokens": 1414
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2262,
+        "completion_tokens": 111,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 94,
+        "total_tokens": 2373
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2192,
+        "completion_tokens": 286,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 269,
+        "total_tokens": 2478
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2094,
+        "completion_tokens": 107,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 90,
+        "total_tokens": 2201
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2003,
+        "completion_tokens": 137,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 120,
+        "total_tokens": 2140
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "openai",
+        "model": "gpt-5.5-pro-2026-04-23",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3646,
+        "completion_tokens": 4376,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "reasoning_tokens": 3619,
+        "total_tokens": 8022
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": false,
+  "analysis_completeness": {
+    "total_components": 12,
+    "scanned_components": 1,
+    "coverage_percent": 8.3,
+    "is_complete": false,
+    "execution_successful": false,
+    "fully_inspected_files": 1,
+    "partially_inspected_files": 11,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "LICENSE.txt",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "SKILL.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_security_discovery"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "forms.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "reference.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "reference.md",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAITimeoutError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/check_bounding_boxes.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/check_fillable_fields.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/convert_pdf_to_images.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/create_validation_image.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/extract_form_field_info.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/extract_form_structure.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent",
+          "semantic_quality_policy"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      },
+      {
+        "outcome": "failed",
+        "phase": "semantic",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/fill_pdf_form_with_annotations.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "semantic_developer_intent"
+        ],
+        "error_class": "OpenAIRateLimitError"
+      }
+    ],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 4,
+        "skipped": 0,
+        "failed": 8,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 6,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "failed",
+        "planned_work": 12,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 2,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [
+      "Analyzer semantic_developer_intent status: failed.",
+      "Analyzer semantic_quality_policy status: failed.",
+      "Analyzer semantic_security_discovery status: failed."
+    ],
+    "findings_before_filtering": 4,
+    "findings_after_filtering": 4
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "skill_name": "europe-travel-guide",
+  "purpose": "A practical Europe travel planning Agent Skill with safe tool-calling guidance.",
+  "allowed_tools": [
+    "Tavily",
+    "WebFetch",
+    "Read",
+    "Calculator"
+  ],
+  "not_a_test_skill": true,
+  "use_cases": [
+    "Europe itineraries",
+    "city recommendations",
+    "route planning",
+    "budget estimates",
+    "current travel checks",
+    "packing and cultural guidance"
+  ],
+  "safety_boundary": "Do not invent current facts; use tools for changing information such as prices, schedules, visas, weather, and closures.",
+  "tooling_note": "Use Tavily for web search/current information checks instead of generic WebSearch."
+}

@@ -1,0 +1,5 @@
+﻿{
+    "status":  "NOT_EXPORTED",
+    "error":  "The remote server returned an error: (403) Forbidden.",
+    "reason":  "Security Hotspots endpoint was unavailable or unsupported by this SonarQube version."
+}

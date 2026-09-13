@@ -1,0 +1,974 @@
+{
+  "skill": {
+    "name": "mcp-builder",
+    "source": "D:\\ClaudeSkills\\skills\\skills\\mcp-builder",
+    "scanned_at": "2026-09-01T05:56:19.868805+00:00"
+  },
+  "risk_assessment": {
+    "score": 90,
+    "severity": "CRITICAL",
+    "recommendation": "DO_NOT_INSTALL"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 202,
+      "executable": false,
+      "size_bytes": 11546
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 236,
+      "executable": false,
+      "size_bytes": 9328
+    },
+    {
+      "path": "reference/evaluation.md",
+      "type": "markdown",
+      "lines": 602,
+      "executable": false,
+      "size_bytes": 22264
+    },
+    {
+      "path": "reference/mcp_best_practices.md",
+      "type": "markdown",
+      "lines": 249,
+      "executable": false,
+      "size_bytes": 7579
+    },
+    {
+      "path": "reference/node_mcp_server.md",
+      "type": "markdown",
+      "lines": 970,
+      "executable": false,
+      "size_bytes": 29519
+    },
+    {
+      "path": "reference/python_mcp_server.md",
+      "type": "markdown",
+      "lines": 719,
+      "executable": false,
+      "size_bytes": 25817
+    },
+    {
+      "path": "scripts/connections.py",
+      "type": "python",
+      "lines": 151,
+      "executable": true,
+      "size_bytes": 5026
+    },
+    {
+      "path": "scripts/evaluation.py",
+      "type": "python",
+      "lines": 373,
+      "executable": true,
+      "size_bytes": 12952
+    },
+    {
+      "path": "scripts/example_evaluation.xml",
+      "type": "other",
+      "lines": 22,
+      "executable": false,
+      "size_bytes": 1216
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "type": "text",
+      "lines": 2,
+      "executable": false,
+      "size_bytes": 31
+    }
+  ],
+  "issues": [
+    {
+      "id": "RP1",
+      "finding_id": "finding-f4e196ffd0834b679a99c212b847d2ed",
+      "category": "MCP Rug Pull",
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 141,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "The finding notes 'npx @modelcontextprotocol/inspector' without a pinned version. In general software development, unpinned npx references can pull whatever latest version exists, potentially causing version inconsistencies. However, in this context: (1) The @modelcontextprotocol organization is the official/legitimate MCP organization, drastically reducing supply chain risk; (2) This is an educational guide showing example commands for users to test their MCP servers; (3) The instruction is about running a development tool, not deploying production code. The intent is benign - guiding users to the inspector tool. While unpinned versions are generally a mild concern in production deployment, the skill context makes this significantly less dangerous.",
+      "remediation": "Consider pinning the version for reproducibility in production deployments (e.g., 'npx @modelcontextprotocol/inspector@^1.0.0' or using exact version pins). However, for an educational guide, the unpinned reference is acceptable as it shows users how to access the latest inspector. Add a note about version pinning for production use.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI16"
+      ]
+    },
+    {
+      "id": "PE3",
+      "finding_id": "finding-cece486292d8400e8d5f07142a955b79",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "location": {
+        "file": "reference/mcp_best_practices.md",
+        "start_line": 158,
+        "end_line": null
+      },
+      "finding": "access tokens",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "code_snippet": "\n**OAuth 2.1**:\n- Use secure OAuth 2.1 with certificates from recognized authorities\n- Validate access tokens before processing requests\n- Only accept tokens specifically intended for your server\n\n**API Keys**:",
+      "intent": null,
+      "tags": [
+        "Privilege Escalation",
+        "llm-unconfirmed"
+      ]
+    },
+    {
+      "id": "PE3",
+      "finding_id": "finding-9380fd3360374aae9d050b252309f716",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "location": {
+        "file": "scripts/connections.py",
+        "start_line": 80,
+        "end_line": null
+      },
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "code_snippet": "        super().__init__()\n        self.command = command\n        self.args = args or []\n        self.env = env\n\n    def _create_context(self):\n        return stdio_client(",
+      "intent": null,
+      "tags": [
+        "Privilege Escalation",
+        "llm-unconfirmed"
+      ]
+    },
+    {
+      "id": "SC4",
+      "finding_id": "finding-07f26a1e2d7044789b66e482f253d64a",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: anthropic has 4 known advisory(ies) (CVE-2026-34450 (Claude SDK for Python has Insecure Default File Permissions in Local Filesystem ); CVE-2026-34452 (Claude SDK for Python: Memory Tool Path Validation Race Condition Allows Sandbox); CVE-2026-34450 (The Claude SDK for Python provides access to the Claude API from Python applicat) +1 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.85,
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": "anthropic",
+      "explanation": "Four CVEs are associated with the `anthropic` SDK (CVE-2026-34450: insecure default file permissions; CVE-2026-34452: race condition in memory tool path validation allowing sandbox escape). The manifest uses `>=0.39.0` without pinning, so the exact installed version cannot be verified against these advisories. If a vulnerable version < 0.39.0 or a patched-but-still-risky release is pulled, the LLM's sandbox or filesystem could be compromised through the SDK's file operations or memory-tool handling.",
+      "remediation": "Pin `anthropic` to a version known to contain the fixes (e.g., `anthropic>=0.39.0,<0.38.0` if 0.39.0+ includes the patches, or explicitly `anthropic==0.X.Y` where advisories are resolved). Update to the latest patched release and review the SDK's file-permission and sandboxing logic.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "Supply Chain"
+      ]
+    },
+    {
+      "id": "SC4",
+      "finding_id": "finding-bdacaba6216d4f50b35e56ad845385b7",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: mcp has 10 known advisory(ies) (CVE-2025-53366 (MCP Python SDK vulnerability in the FastMCP Server causes validation error, lead); CVE-2025-66416 (Model Context Protocol (MCP) Python SDK does not enable DNS rebinding protection); CVE-2026-52870 (MCP Python SDK: Experimental task handlers allow any client to access and cancel) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.85,
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 2,
+        "end_line": null
+      },
+      "finding": "mcp",
+      "explanation": "Ten CVEs are reported for the `mcp` Python SDK, including: missing DNS rebinding protection (CVE-2025-66416), task handler access/cancellation flaws allowing any client to interact with experimental handlers (CVE-2026-52870), and validation errors that could lead to injection or unexpected behavior (CVE-2025-53366). The `>=1.1.0` specifier makes the exact version unverifiable. An MCP server built with an affected version could be susceptible to DNS rebinding attacks, unauthorized task manipulation, or input-validation bypasses, especially if the server is exposed to untrusted LLMs or external traffic.",
+      "remediation": "Pin `mcp` to a specific, audited version (e.g., `mcp==1.1.0` or a later patched 1.x.x release that addresses the CVEs). Enable DNS rebinding protection if using the MCP SDK's server utilities, and review task handler access controls. Update the SDK and re-audit all exposed tools.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "Supply Chain"
+      ]
+    },
+    {
+      "id": "SQP-1",
+      "finding_id": "finding-cf1ec0b5b1a64f4abd3870f60fa34db0",
+      "category": null,
+      "pattern": null,
+      "severity": "HIGH",
+      "confidence": 1.0,
+      "location": {
+        "file": "scripts/evaluation.py",
+        "start_line": 1,
+        "end_line": 5
+      },
+      "finding": null,
+      "explanation": "The review file is `scripts/evaluation.py` (Python code). SQP-1 only applies to `.md`, `.txt`, `.yaml`, `.yml`, `.json`, `.toml`. No findings reported for this category.",
+      "remediation": "N/A \u2014 category not applicable to this file type.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-f74ba1751b504ac991224b152c0a609a",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.97,
+      "location": {
+        "file": "scripts/evaluation.py",
+        "start_line": 1,
+        "end_line": 372
+      },
+      "finding": null,
+      "explanation": "The Python file contains explicit `print()` statements for task progression, connection status, and evaluation output. The only file write (`args.output.write_text(report)` at L366) is conditional on user-provided output path and directly supports the skill's evaluation purpose. No subprocess/shell execution, no hardcoded credential access, and no destructive operations are present. All observed operations either have visible logging or are intrinsic to the skill's declared function.",
+      "remediation": "N/A \u2014 no genuine missing-user-warning issues detected.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-3",
+      "finding_id": "finding-cf653f18842a4c2ca76c2b1a872fe3a5",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.95,
+      "location": {
+        "file": "scripts/evaluation.py",
+        "start_line": 1,
+        "end_line": 372
+      },
+      "finding": null,
+      "explanation": "The file contains no config values, comments, or string literals that force a specific language or locale on the user without opt-in. The `EVALUATION_PROMPT` (L021\u2013L053) and all docstrings/comments are in English as the default language for the Claude-based evaluation task, but this constitutes the skill's operational language, not a policy imposition. No `locale` modules, language selectors, or region-locked logic are present.",
+      "remediation": "N/A \u2014 no policy violations detected.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "PE3",
+      "finding_id": "finding-bdd7a570e1b64b9ca6d3d373900133ae",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "location": {
+        "file": "scripts/evaluation.py",
+        "start_line": 344,
+        "end_line": null
+      },
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "code_snippet": "        sys.exit(1)\n\n    headers = parse_headers(args.headers) if args.headers else None\n    env_vars = parse_env_vars(args.env) if args.env else None\n\n    try:\n        connection = create_connection(",
+      "intent": null,
+      "tags": [
+        "Privilege Escalation"
+      ]
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5443,
+        "completion_tokens": 3326,
+        "total_tokens": 8769
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1472,
+        "completion_tokens": 1230,
+        "total_tokens": 2702
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9442,
+        "completion_tokens": 988,
+        "total_tokens": 10430
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4300,
+        "completion_tokens": 730,
+        "total_tokens": 5030
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4475,
+        "completion_tokens": 1429,
+        "total_tokens": 5904
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4058,
+        "completion_tokens": 1527,
+        "total_tokens": 5585
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1053,
+        "completion_tokens": 1282,
+        "total_tokens": 2335
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 10676,
+        "completion_tokens": 2448,
+        "total_tokens": 13124
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2926,
+        "completion_tokens": 2943,
+        "total_tokens": 5869
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 12993,
+        "completion_tokens": 841,
+        "total_tokens": 13834
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6085,
+        "completion_tokens": 3191,
+        "total_tokens": 9276
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1505,
+        "completion_tokens": 1755,
+        "total_tokens": 3260
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4508,
+        "completion_tokens": 1948,
+        "total_tokens": 6456
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4091,
+        "completion_tokens": 3024,
+        "total_tokens": 7115
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1086,
+        "completion_tokens": 2630,
+        "total_tokens": 3716
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9475,
+        "completion_tokens": 3630,
+        "total_tokens": 13105
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2959,
+        "completion_tokens": 3859,
+        "total_tokens": 6818
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6118,
+        "completion_tokens": 4495,
+        "total_tokens": 10613
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 10709,
+        "completion_tokens": 2255,
+        "total_tokens": 12964
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 13026,
+        "completion_tokens": 3737,
+        "total_tokens": 16763
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4333,
+        "completion_tokens": 3147,
+        "cached_tokens": 2176,
+        "total_tokens": 7480
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4049,
+        "completion_tokens": 1370,
+        "total_tokens": 5419
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3874,
+        "completion_tokens": 1744,
+        "total_tokens": 5618
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9016,
+        "completion_tokens": 1778,
+        "total_tokens": 10794
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3632,
+        "completion_tokens": 1417,
+        "total_tokens": 5049
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 12567,
+        "completion_tokens": 1242,
+        "total_tokens": 13809
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 10250,
+        "completion_tokens": 2939,
+        "total_tokens": 13189
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2500,
+        "completion_tokens": 1022,
+        "total_tokens": 3522
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5659,
+        "completion_tokens": 2863,
+        "total_tokens": 8522
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1046,
+        "completion_tokens": 1294,
+        "total_tokens": 2340
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 627,
+        "completion_tokens": 1412,
+        "total_tokens": 2039
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2580,
+        "completion_tokens": 1625,
+        "total_tokens": 4205
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3375,
+        "completion_tokens": 2336,
+        "total_tokens": 5711
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 7497,
+        "completion_tokens": 2350,
+        "total_tokens": 9847
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 917,
+        "completion_tokens": 4916,
+        "total_tokens": 5833
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1888,
+        "completion_tokens": 4048,
+        "total_tokens": 5936
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3136,
+        "completion_tokens": 3835,
+        "total_tokens": 6971
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9395,
+        "completion_tokens": 1680,
+        "total_tokens": 11075
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "nv_build",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1101,
+        "completion_tokens": 2389,
+        "total_tokens": 3490
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": false,
+  "analysis_completeness": {
+    "total_components": 10,
+    "scanned_components": 10,
+    "coverage_percent": 100.0,
+    "is_complete": false,
+    "execution_successful": false,
+    "fully_inspected_files": 10,
+    "partially_inspected_files": 0,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [
+      {
+        "outcome": "failed",
+        "phase": "meta",
+        "reason_code": "llm_batch_failed",
+        "message": "LLM analysis failed for this file range.",
+        "path": "scripts/evaluation.py",
+        "start_line": null,
+        "end_line": null,
+        "fatal": true,
+        "analyzers": [
+          "meta_analyzer"
+        ],
+        "error_class": "OpenAITimeoutError"
+      }
+    ],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "failed",
+        "planned_work": 9,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 1,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [
+      "Analyzer meta_analyzer status: failed."
+    ],
+    "findings_before_filtering": 23,
+    "findings_after_filtering": 9
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "skill_name": "langchain-langgraph-expert-with-scripts",
+  "purpose": "LangChain and LangGraph expert Agent Skill with scripts and command references for coding assistance.",
+  "allowed_tools": [
+    "Tavily",
+    "WebFetch",
+    "Read",
+    "Calculator"
+  ],
+  "included_scripts": [
+    "scripts/minimal_langgraph_app.py",
+    "scripts/tool_calling_agent_skeleton.py",
+    "scripts/rag_pipeline_skeleton.py",
+    "scripts/human_in_loop_graph_skeleton.py",
+    "scripts/debug_graph_state.py"
+  ],
+  "included_commands": [
+    "commands/setup-python-project.md",
+    "commands/debugging-commands.md",
+    "commands/langsmith-tracing.md"
+  ],
+  "accuracy_boundary": "Use current official docs for version-sensitive imports, package names, and APIs."
+}

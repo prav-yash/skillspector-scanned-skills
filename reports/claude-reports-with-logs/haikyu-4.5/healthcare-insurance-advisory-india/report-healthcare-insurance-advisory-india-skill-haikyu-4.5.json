@@ -1,0 +1,618 @@
+{
+  "skill": {
+    "name": "healthcare-insurance-advisory-india",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\healthcare-insurance-advisory-india",
+    "scanned_at": "2026-08-25T09:45:13.218593+00:00"
+  },
+  "risk_assessment": {
+    "score": 14,
+    "severity": "LOW",
+    "recommendation": "SAFE"
+  },
+  "components": [
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 64,
+      "executable": false,
+      "size_bytes": 8461
+    },
+    {
+      "path": "references/buying-guidance.md",
+      "type": "markdown",
+      "lines": 47,
+      "executable": false,
+      "size_bytes": 4476
+    },
+    {
+      "path": "references/claims-and-irdai.md",
+      "type": "markdown",
+      "lines": 43,
+      "executable": false,
+      "size_bytes": 4934
+    },
+    {
+      "path": "references/official-sources.md",
+      "type": "markdown",
+      "lines": 31,
+      "executable": false,
+      "size_bytes": 3202
+    },
+    {
+      "path": "references/rejections-and-grievance.md",
+      "type": "markdown",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 4712
+    },
+    {
+      "path": "references/safety-guardrails.md",
+      "type": "markdown",
+      "lines": 49,
+      "executable": false,
+      "size_bytes": 4287
+    }
+  ],
+  "issues": [
+    {
+      "id": "SQP-1",
+      "finding_id": "finding-ddd7d40264d740c1854ec33ebad5e1c8",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "The trigger phrase in the description includes extremely broad terms like 'health insurance' and 'a health policy' that will match nearly any health or financial discussion, not just Indian private insurance advisory questions. This will cause the skill to be invoked inappropriately for unrelated user requests, leading to irrelevant guidance and poor user experience. The scope creep also creates risk that users receive insurance advice when they're seeking different types of guidance.",
+      "remediation": "Narrow the trigger phrases to more specific indicators of the skill's actual scope. Replace vague terms like 'health insurance' with concrete entry points: 'IRDAI', 'Insurance Ombudsman', 'TPA claim dispute', 'mediclaim rejection', 'cashless authorization in India'. Remove generic phrases that overlap with everyday speech. Add explicit negative triggers (e.g., 'NOT for government schemes like Ayushman Bharat' in the trigger metadata itself) to prevent false positives.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-3",
+      "finding_id": "finding-0ef0b9162712441c98f10fcc7053359c",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 2,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "The skill description and operational rules enforce an India-only scope without any mechanism for user consent, transparency, or override. A user asking about health insurance in a non-Indian context or who is multi-national/expatriate could receive India-specific guidance that is inapplicable or harmful to their situation. There is no clear user-facing notice that this skill only applies to Indian private health insurance, creating a localization mismatch that violates user autonomy.",
+      "remediation": "Add explicit user-facing scope disclosure in the skill's opening interaction: 'This skill covers private health insurance in India only. If your policy is from another country, this guidance may not apply.' Implement a detection step: ask 'Are you asking about health insurance in India?' early in the conversation if the location is ambiguous. In the skill metadata/description, clarify the geographic scope prominently (e.g., 'India-specific private insurance advisory'). Consider adding a fallback for non-India queries that redirects the user politely rather than silently applying wrong rules.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": false,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3529,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3562
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3156,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3189
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3435,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3468
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3416,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3449
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3418,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3451
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4471,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4504
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3340,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3373
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3357,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3390
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3451,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3484
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3078,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3111
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3338,
+        "completion_tokens": 409,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3747
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4393,
+        "completion_tokens": 554,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4947
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3894,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3927
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2858,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2891
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2952,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2985
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2579,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2612
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2839,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2872
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2841,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2874
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2999,
+        "completion_tokens": 587,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3586
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3889,
+        "completion_tokens": 810,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4699
+      }
+    ],
+    "llm_calls_attempted": 4,
+    "llm_calls_succeeded": 4
+  },
+  "execution_successful": true,
+  "analysis_completeness": {
+    "total_components": 6,
+    "scanned_components": 6,
+    "coverage_percent": 100.0,
+    "is_complete": true,
+    "execution_successful": true,
+    "fully_inspected_files": 6,
+    "partially_inspected_files": 0,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "not_applicable",
+        "planned_work": 0,
+        "completed": 0,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0,
+        "reason_code": "no_applicable_files",
+        "message": "No files matched this analyzer's applicability contract."
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 6,
+        "completed": 6,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [],
+    "findings_before_filtering": 4,
+    "findings_after_filtering": 2
+  }
+}

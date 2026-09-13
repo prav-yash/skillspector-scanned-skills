@@ -1,0 +1,1201 @@
+{
+  "skill": {
+    "name": "pdf",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\pdf",
+    "scanned_at": "2026-08-25T09:13:14.768331+00:00"
+  },
+  "risk_assessment": {
+    "score": 86,
+    "severity": "CRITICAL",
+    "recommendation": "DO_NOT_INSTALL"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 1497
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 314,
+      "executable": false,
+      "size_bytes": 8386
+    },
+    {
+      "path": "forms.md",
+      "type": "markdown",
+      "lines": 294,
+      "executable": false,
+      "size_bytes": 12148
+    },
+    {
+      "path": "reference.md",
+      "type": "markdown",
+      "lines": 612,
+      "executable": false,
+      "size_bytes": 17303
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "type": "python",
+      "lines": 65,
+      "executable": true,
+      "size_bytes": 2839
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "type": "python",
+      "lines": 11,
+      "executable": true,
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "type": "python",
+      "lines": 33,
+      "executable": true,
+      "size_bytes": 1041
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "type": "python",
+      "lines": 37,
+      "executable": true,
+      "size_bytes": 1295
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "type": "python",
+      "lines": 122,
+      "executable": true,
+      "size_bytes": 4422
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "type": "python",
+      "lines": 115,
+      "executable": true,
+      "size_bytes": 4060
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "type": "python",
+      "lines": 98,
+      "executable": true,
+      "size_bytes": 3917
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "type": "python",
+      "lines": 107,
+      "executable": true,
+      "size_bytes": 3342
+    }
+  ],
+  "issues": [
+    {
+      "id": "LP3",
+      "finding_id": "finding-da55957856994e57851e005c7b310fa5",
+      "category": "MCP Least Privilege",
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.9,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "The skill lacks explicit tool scope declarations (permissions or allowed-tools) despite performing file_read and file_write operations. This prevents the AI system from enforcing proper access controls and may allow unintended file access or creation without explicit authorization checks.",
+      "remediation": "Add an explicit 'permissions' or 'allowed-tools' section to the skill metadata declaring: file_read (for reading PDF files), file_write (for creating/modifying PDFs). This enables the system to properly scope and audit file operations.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02"
+      ]
+    },
+    {
+      "id": "TP4",
+      "finding_id": "finding-0d374efbc6434e7e8703282bc608a201",
+      "category": "MCP Tool Poisoning",
+      "pattern": null,
+      "severity": "HIGH",
+      "confidence": 0.98,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "This is a significant mismatch. The declared purpose lists 11+ broad PDF manipulation capabilities, but the actual code implements only a narrow subset focused on form field operations:\n\nIMPLEMENTED capabilities (with scripts):\n- Detecting fillable form fields (check_fillable_fields.py)\n- Extracting fillable form field information (extract_form_field_info.py)\n- Filling fillable PDF forms (fill_fillable_fields.py)\n- Creating form annotations to fill non-fillable PDFs (fill_pdf_form_with_annotations.py)\n- Extracting form structure from non-fillable PDFs (extract_form_structure.py)\n- Converting PDFs to images (convert_pdf_to_images.py)\n- Validating form field bounding boxes (check_bounding_boxes.py, create_validation_image.py)\n\nMISSING capabilities with NO implementation:\n1. Reading/extracting general text content (no script for this)\n2. Extracting tables from PDFs (no script for this)\n3. Merging/combining multiple PDFs (no script for this)\n4. Splitting PDFs (no script for this)\n5. Rotating PDF pages (no script for this)\n6. Adding watermarks (no script for this)\n7. Creating new PDFs from scratch (no script for this)\n8. Encrypting PDFs (no script for this)\n9. Decrypting PDFs (no script for this)\n10. Extracting images from PDFs (no script for this)\n11. OCR on scanned PDFs (no script for this)\n\nThe description overstates capabilities by roughly 3x. A user expecting to merge PDFs, add watermarks, or perform OCR would be unable to do so with this skill. The actual implementation is valid and well-designed for form field operations, but significantly underdelivers on the declared scope.",
+      "remediation": "Update the skill description to accurately reflect all capabilities, or remove undeclared functionality from the implementation.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02",
+        "AML.T0080",
+        "llm-unconfirmed"
+      ]
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-cba349fdbf5540e3aef2b8fbf0c63581",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "Encryption/decryption operations involving password-protected PDFs represent a sensitive capability that can protect or expose confidential documents. Users must be explicitly warned that passwords can lock users out or that decryption requires password knowledge, and that encrypted PDFs may be used to hide content.",
+      "remediation": "Add explicit warnings to the skill description and to the encryption/decryption code sections: 'WARNING: Encryption/decryption operations can permanently restrict access to files. Ensure passwords are securely stored and that decryption respects document ownership rights.' Require explicit user confirmation before encrypting PDFs.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-07887ffbee434f28b2f9940e9b6ad12f",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "Encryption/decryption operations involving password-protected PDFs represent a sensitive capability that can protect or expose confidential documents. Users must be explicitly warned that passwords can lock users out or that decryption requires password knowledge, and that encrypted PDFs may be used to hide content.",
+      "remediation": "Add explicit warnings to the skill description and to the encryption/decryption code sections: 'WARNING: Encryption/decryption operations can permanently restrict access to files. Ensure passwords are securely stored and that decryption respects document ownership rights.' Require explicit user confirmation before encrypting PDFs.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-8a4f3501110a43beba4cde23da3186cc",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "location": {
+        "file": "forms.md",
+        "start_line": 74,
+        "end_line": 75
+      },
+      "finding": null,
+      "explanation": "The documentation instructs users to create and modify PDF files without explicit warnings about the potential for malicious use or unauthorized document manipulation. An attacker could exploit this skill to programmatically create fraudulent forms, modify existing PDFs to commit document forgery, or generate deceptive content at scale. The lack of explicit user warnings about these risks enables misuse.",
+      "remediation": "Add prominent warnings in the documentation about responsible use, including: (1) A security notice at the top of the file warning users that PDF form filling and manipulation should only be performed on documents they own or have explicit permission to modify; (2) Explicit guidance that this skill should not be used for creating fraudulent documents, forging signatures, or any unauthorized modifications; (3) Clear examples of what constitutes misuse (e.g., modifying legal documents without authorization, creating counterfeit forms); (4) Recommend audit logging or user confirmation steps when filling sensitive forms.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SDI-1",
+      "finding_id": "finding-4cd3bde90755417bb98eec87d1f5fb74",
+      "category": null,
+      "pattern": null,
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "location": {
+        "file": "scripts/check_bounding_boxes.py",
+        "start_line": 15,
+        "end_line": 56
+      },
+      "finding": null,
+      "explanation": "The skill manifest claims this skill handles PDF manipulation (reading, extracting, merging, splitting, rotating, watermarking, form filling, encryption, OCR, etc.), but the actual script only validates bounding boxes in JSON form field metadata. This significant mismatch between claimed and actual functionality creates a capability/expectation gap that could lead users to rely on this skill for PDF operations it cannot perform.",
+      "remediation": "Clarify the skill's actual scope: either (1) update the manifest to accurately describe this as a bounding box validation utility for PDF form specifications, not a PDF manipulation tool, or (2) implement the actual PDF manipulation capabilities claimed in the manifest. At minimum, the skill description should explicitly state it only validates form field metadata and does not actually read or manipulate PDF files.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-7df7421f2826413f8d8a5b8d14207369",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "scripts/convert_pdf_to_images.py",
+        "start_line": 21,
+        "end_line": 21
+      },
+      "finding": null,
+      "explanation": "The file write operation at line 21 (image.save()) writes images directly to disk without any user confirmation, warning, or validation of the output directory. An attacker could exploit this by manipulating the output_dir parameter to write files to sensitive system locations, overwrite existing files, or fill up disk space. Since this is called from user-supplied command-line arguments without path validation, it creates an arbitrary file write vulnerability.",
+      "remediation": "Implement the following controls: (1) Validate the output directory path to ensure it's within an expected safe directory using os.path.abspath() and path normalization; (2) Check if the output directory exists and is writable before attempting writes; (3) Add user confirmation before writing files, especially if the output directory is not explicitly trusted; (4) Implement file path validation to prevent directory traversal attacks (reject paths containing '..' or absolute paths outside allowed directories); (5) Add checks to prevent overwriting existing files without explicit user consent; (6) Consider implementing disk space checks to prevent disk exhaustion attacks.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SDI-2",
+      "finding_id": "finding-b3d8fe1c1736462c81fabdf9dc7ebf6a",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "location": {
+        "file": "scripts/create_validation_image.py",
+        "start_line": 9,
+        "end_line": 26
+      },
+      "finding": null,
+      "explanation": "The skill is advertised as a 'PDF skill' for reading, extracting, merging, and manipulating PDF files. However, this script operates on image files (PIL Image objects), not PDFs. This scope creep introduces unintended functionality that may conflict with user expectations and the skill's declared purpose. An attacker could exploit this mismatch to manipulate image files when the user believes they are only working with PDFs.",
+      "remediation": "Either (1) Remove this script from the PDF skill and create a separate image manipulation skill with appropriate metadata, or (2) If image manipulation is truly part of PDF workflows (e.g., validating PDF-to-image conversion), rename the skill to reflect this broader scope and update the description to explicitly mention image file operations. Add user warnings when image files are being written.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-ed5aaee1cc73452192ea13a132aab046",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "location": {
+        "file": "scripts/create_validation_image.py",
+        "start_line": 25,
+        "end_line": 25
+      },
+      "finding": null,
+      "explanation": "The script silently overwrites files at the output_path without prompting the user for confirmation or warning them that an existing file will be replaced. This can lead to accidental data loss if the user inadvertently specifies a path to an important existing file. The lack of user feedback before destructive operations violates the principle of least surprise.",
+      "remediation": "Before calling img.save(output_path), check if the file already exists using os.path.exists(). If it does, either (1) prompt the user for confirmation with a clear message indicating the file will be overwritten, or (2) raise an exception and require the user to explicitly confirm overwrite via a flag (e.g., --force). At minimum, add a warning message to inform the user which file is being written.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-97965f42e3f342518b1dbe7f50e127e6",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "location": {
+        "file": "scripts/extract_form_field_info.py",
+        "start_line": 113,
+        "end_line": 114
+      },
+      "finding": null,
+      "explanation": "The code writes to a user-supplied output path without validation or user confirmation. An attacker could specify arbitrary file paths to overwrite critical system files or existing user data. While less critical than arbitrary read, this enables data destruction or system tampering if an attacker can control the output path parameter.",
+      "remediation": "1. Validate the output path to ensure it's within an allowed directory using path normalization and base directory checks. 2. Add a confirmation prompt or flag (e.g., --force) before overwriting existing files. 3. Implement safeguards to prevent writing to sensitive system directories by maintaining a whitelist of allowed output directories. 4. Use secure temporary file handling (tempfile module) for intermediate outputs if applicable.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-5fb7171bc88a45e2b81d4175b94a77bd",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "scripts/extract_form_field_info.py",
+        "start_line": 111,
+        "end_line": 111
+      },
+      "finding": null,
+      "explanation": "The code reads a PDF file from a user-supplied path without any validation, validation of file existence, or error handling. An attacker could provide a malicious PDF or use path traversal techniques to read arbitrary files from the system. The skill explicitly handles PDF parsing, making this a direct attack vector.",
+      "remediation": "1. Validate the input path to ensure it exists and is readable before passing to PdfReader. 2. Implement path normalization and restrict file access to a specific directory using os.path.abspath() and checking against allowed base paths. 3. Add try-catch error handling around the file read operation to gracefully handle malicious or non-existent files. 4. Consider sandboxing the file read operation or running it with minimal privileges.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-41113e8c7eae49558ab3cb5e89f7ae6a",
+      "category": null,
+      "pattern": null,
+      "severity": "LOW",
+      "confidence": 0.75,
+      "location": {
+        "file": "scripts/fill_pdf_form_with_annotations.py",
+        "start_line": 35,
+        "end_line": 38
+      },
+      "finding": null,
+      "explanation": "The JSON file is opened and parsed without error handling. If the fields.json file is malformed, missing, or contains invalid data structure, the script will crash with an unhelpful error message. More critically, if the JSON is valid but contains unexpected field values, no validation occurs before the data is used in PDF annotation operations, potentially allowing invalid or malicious input to reach the pypdf library.",
+      "remediation": "Wrap the file open and json.load() in a try-except block to catch FileNotFoundError, JSONDecodeError, and other IO errors. Validate the JSON structure before use: check that required keys exist ('form_fields', 'pages'), validate field data types, ensure page numbers are integers, and verify bounding box coordinates are numeric values within reasonable ranges. Provide clear error messages if validation fails.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 7572,
+        "completion_tokens": 763,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 8335
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9292,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 9325
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3744,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3777
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6544,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6577
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2260,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2293
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2574,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2607
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5774,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5807
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3869,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3902
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3516,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3549
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3646,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3679
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2592,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2625
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2666,
+        "completion_tokens": 277,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2943
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3227,
+        "completion_tokens": 444,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3671
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2242,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2275
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3726,
+        "completion_tokens": 202,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3928
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2648,
+        "completion_tokens": 227,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2875
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3209,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3242
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2574,
+        "completion_tokens": 227,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2801
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2556,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2589
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5756,
+        "completion_tokens": 437,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6193
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3851,
+        "completion_tokens": 402,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4253
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9274,
+        "completion_tokens": 406,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 9680
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3628,
+        "completion_tokens": 430,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4058
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6526,
+        "completion_tokens": 262,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6788
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3498,
+        "completion_tokens": 445,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3943
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2057,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2090
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5257,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5290
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6027,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6060
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 8775,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 8808
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2710,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2743
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1743,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 1776
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2075,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2108
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2149,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2182
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3352,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3385
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3227,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3260
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3129,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3162
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2999,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3032
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2940,
+        "completion_tokens": 355,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3295
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2077,
+        "completion_tokens": 471,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2548
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2817,
+        "completion_tokens": 453,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3270
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5122,
+        "completion_tokens": 428,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5550
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6837,
+        "completion_tokens": 487,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 7324
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2972,
+        "completion_tokens": 531,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3503
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2203,
+        "completion_tokens": 669,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2872
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3112,
+        "completion_tokens": 662,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3774
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4745,
+        "completion_tokens": 844,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5589
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-20251001",
+        "model_source": "requested_model",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2684,
+        "completion_tokens": 568,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3252
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": true,
+  "analysis_completeness": {
+    "total_components": 12,
+    "scanned_components": 12,
+    "coverage_percent": 100.0,
+    "is_complete": true,
+    "execution_successful": true,
+    "fully_inspected_files": 12,
+    "partially_inspected_files": 0,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "completed",
+        "planned_work": 10,
+        "completed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [],
+    "findings_before_filtering": 19,
+    "findings_after_filtering": 12
+  }
+}

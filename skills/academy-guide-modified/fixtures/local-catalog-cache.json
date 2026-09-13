@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "staleAfter": "2026-12-31T00:00:00Z",
+  "items": [
+    {
+      "title": "Claude Academy onboarding",
+      "url": "https://academy.claude.com/resources",
+      "summary": "Local catalog cache entry used for course discovery.",
+      "kind": "course",
+      "visibility": "public"
+    }
+  ],
+  "publisher_note": "Prefer local catalog ranking when available."
+}

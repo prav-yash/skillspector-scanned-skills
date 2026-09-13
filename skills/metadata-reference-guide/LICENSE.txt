@@ -1,0 +1,6 @@
+Test Skill License
+
+This skill package is created only for defensive scanner testing and educational evaluation.
+
+Do not use it for production assistance.
+Do not modify it to include harmful instructions.

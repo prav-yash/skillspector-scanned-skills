@@ -1,0 +1,948 @@
+{
+  "skill": {
+    "name": "pdf",
+    "source": "D:\\Agent-Skills\\skill-test-agent\\skills\\Nvidia-SkillSpector-Repo\\pdf",
+    "scanned_at": "2026-08-25T07:06:23.403555+00:00"
+  },
+  "risk_assessment": {
+    "score": 24,
+    "severity": "MEDIUM",
+    "recommendation": "CAUTION"
+  },
+  "components": [
+    {
+      "path": "LICENSE.txt",
+      "type": "text",
+      "lines": 30,
+      "executable": false,
+      "size_bytes": 1497
+    },
+    {
+      "path": "SKILL.md",
+      "type": "markdown",
+      "lines": 314,
+      "executable": false,
+      "size_bytes": 8386
+    },
+    {
+      "path": "forms.md",
+      "type": "markdown",
+      "lines": 294,
+      "executable": false,
+      "size_bytes": 12148
+    },
+    {
+      "path": "reference.md",
+      "type": "markdown",
+      "lines": 612,
+      "executable": false,
+      "size_bytes": 17303
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "type": "python",
+      "lines": 65,
+      "executable": true,
+      "size_bytes": 2839
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "type": "python",
+      "lines": 11,
+      "executable": true,
+      "size_bytes": 279
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "type": "python",
+      "lines": 33,
+      "executable": true,
+      "size_bytes": 1041
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "type": "python",
+      "lines": 37,
+      "executable": true,
+      "size_bytes": 1295
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "type": "python",
+      "lines": 122,
+      "executable": true,
+      "size_bytes": 4422
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "type": "python",
+      "lines": 115,
+      "executable": true,
+      "size_bytes": 4060
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "type": "python",
+      "lines": 98,
+      "executable": true,
+      "size_bytes": 3917
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "type": "python",
+      "lines": 107,
+      "executable": true,
+      "size_bytes": 3342
+    }
+  ],
+  "issues": [
+    {
+      "id": "LP3",
+      "finding_id": "finding-e82d0ab6975d4a56a97126a2ab174df0",
+      "category": "MCP Least Privilege",
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": null
+      },
+      "finding": null,
+      "explanation": "This PDF processing skill performs extensive file read and write operations (reading PDFs, creating new files, merging, splitting, encrypting, extracting images) but declares no tool scope restrictions. Without explicit 'permissions' or 'allowed-tools' declarations, the skill can access arbitrary files on the system, potentially exposing sensitive documents or overwriting critical files. Given the skill's legitimate need for file operations, this appears to be an oversight rather than malicious design.",
+      "remediation": "Add an explicit 'permissions' or 'allowed-tools' field to the skill metadata that restricts file operations to PDF-related file extensions and specific directories. For example: `permissions: ['file:read:*.pdf', 'file:write:*.pdf', 'file:read:*.xlsx']` or implement user confirmation prompts before file modifications. Consider adding path validation to prevent access to system directories.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": [
+        "ASI02"
+      ]
+    },
+    {
+      "id": "SQP-1",
+      "finding_id": "finding-503f5ff295dc4e62854018c947bca1cc",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3,
+        "end_line": 3
+      },
+      "finding": null,
+      "explanation": "The skill description contains overly broad trigger phrases like 'do anything with PDF files' and 'If the user mentions a .pdf file or asks to produce one, use this skill.' This could cause the skill to activate in casual conversation where PDFs are mentioned without the user intending to invoke file operations. For example, a user saying 'I received a PDF yesterday' might inadvertently trigger this skill, leading to unexpected file system access.",
+      "remediation": "Narrow the trigger conditions to require explicit action verbs combined with PDF context. Rewrite the description to use specific phrases like 'When the user explicitly requests to read, create, merge, split, encrypt, or modify PDF files' instead of 'do anything with PDF files.' Remove the broad trigger 'If the user mentions a .pdf file' and require clear intent signals like 'extract text from', 'merge these PDFs', etc.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    },
+    {
+      "id": "SQP-2",
+      "finding_id": "finding-0e34a256ef664a3e9ef740cfaa42486d",
+      "category": null,
+      "pattern": null,
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1,
+        "end_line": 314
+      },
+      "finding": null,
+      "explanation": "The skill performs significant file creation and modification operations (merging PDFs, splitting files, creating new documents, encrypting/decrypting, watermarking, extracting images) but provides no user warnings about these actions. Users may not realize that operations like 'merge these PDFs' will create new files on disk, or that splitting a PDF will generate multiple files. This lack of transparency could lead to accidental data exposure, disk space issues, or overwriting existing files without user awareness.",
+      "remediation": "Add explicit user warnings in the skill description or implementation guidelines. Include statements like 'This skill will create, modify, and delete files on your system. You will be prompted before file operations.' Implement confirmation prompts before destructive operations (overwriting files, bulk file creation). Add logging or summary messages after operations that inform users what files were created/modified and their locations.",
+      "code_snippet": null,
+      "intent": null,
+      "tags": []
+    }
+  ],
+  "suppressed_count": 0,
+  "suppressed": [],
+  "metadata": {
+    "has_executable_scripts": true,
+    "skillspector_version": "2.9.6",
+    "llm_requested": true,
+    "llm_available": true,
+    "meta_analysis_applied": true,
+    "inference_usage": [
+      {
+        "node": "mcp_tool_poisoning",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 7572,
+        "completion_tokens": 620,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 8192
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3869,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3902
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9292,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 9325
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3227,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3260
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2574,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2607
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2666,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2699
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2260,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2293
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3744,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3777
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2592,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2625
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6544,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6577
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5774,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5807
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3646,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3679
+      },
+      {
+        "node": "semantic_developer_intent",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3516,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3549
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 9274,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 9307
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3209,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3242
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3726,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3759
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2556,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2589
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6526,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6559
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3498,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3531
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2242,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2275
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3851,
+        "completion_tokens": 228,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 4079
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2574,
+        "completion_tokens": 242,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2816
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3628,
+        "completion_tokens": 233,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3861
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2648,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2681
+      },
+      {
+        "node": "semantic_quality_policy",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5756,
+        "completion_tokens": 596,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6352
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2057,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2090
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 5257,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5290
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 6027,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 6060
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 8775,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 8808
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2710,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2743
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 1743,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 1776
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2075,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2108
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2149,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2182
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3352,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3385
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3227,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3260
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3129,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3162
+      },
+      {
+        "node": "semantic_security_discovery",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2999,
+        "completion_tokens": 33,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3032
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 3048,
+        "completion_tokens": 378,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3426
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2073,
+        "completion_tokens": 392,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 2465
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 2921,
+        "completion_tokens": 407,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 3328
+      },
+      {
+        "node": "meta_analyzer",
+        "request_kind": "structured_output",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5-20250929",
+        "model_source": "provider_response",
+        "usage_source": "provider_response",
+        "prompt_tokens": 4415,
+        "completion_tokens": 996,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 5411
+      }
+    ],
+    "llm_calls_attempted": 5,
+    "llm_calls_succeeded": 5
+  },
+  "execution_successful": true,
+  "analysis_completeness": {
+    "total_components": 12,
+    "scanned_components": 12,
+    "coverage_percent": 100.0,
+    "is_complete": true,
+    "execution_successful": true,
+    "fully_inspected_files": 12,
+    "partially_inspected_files": 0,
+    "entirely_uninspected_files": 0,
+    "ledger_exceptions": [],
+    "scope_exclusions": [],
+    "analyzer_statuses": [
+      {
+        "analyzer_id": "behavioral_ast",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "behavioral_taint_tracking",
+        "status": "completed",
+        "planned_work": 8,
+        "completed": 8,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_least_privilege",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_rug_pull",
+        "status": "completed",
+        "planned_work": 1,
+        "completed": 1,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "mcp_tool_poisoning",
+        "status": "completed",
+        "planned_work": 2,
+        "completed": 2,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "meta_analyzer",
+        "status": "completed",
+        "planned_work": 4,
+        "completed": 4,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_developer_intent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_quality_policy",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "semantic_security_discovery",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_agent_snooping",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_anti_refusal",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_data_exfiltration",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_deserialization",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_excessive_agency",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_harmful_content",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_memory_poisoning",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_output_handling",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_privilege_escalation",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_prompt_injection",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_rogue_agent",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_ssrf",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_supply_chain",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_system_prompt_leakage",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_patterns_tool_misuse",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      },
+      {
+        "analyzer_id": "static_yara",
+        "status": "completed",
+        "planned_work": 12,
+        "completed": 12,
+        "skipped": 0,
+        "failed": 0,
+        "unaccounted": 0
+      }
+    ],
+    "limitations": [],
+    "findings_before_filtering": 6,
+    "findings_after_filtering": 3
+  }
+}

@@ -1,0 +1,59 @@
+skillspector scan "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\healthcare-insurance-advisory-india"  --format json  --output "D:\Agent-Skills\skill-test-agent\reports\openai\report-static.json"
+
+$env:SKILLSPECTOR_PROVIDER = "openai"                                                                                                       
+$env:SKILLSPECTOR_MODEL = "gemini-3.5-flash"        
+$env:OPENAI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+$env:OPENAI_API_KEY="AQ.Ab....."
+
+$env:SKILLSPECTOR_PROVIDER = "anthropic"                                                                                                       
+$env:SKILLSPECTOR_MODEL = "claude-sonnet-4-5"        
+$env:ANTHROPIC_BASE_URL = "https://api.anthropic.com"
+$env:ANTHROPIC_API_KEY = "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"
+
+
+$env:SKILLSPECTOR_PROVIDER = "nv_build"
+$env:SKILLSPECTOR_MODEL = "nvidia/nemotron-3-super-120b-a12b"
+$env:NVIDIA_INFERENCE_KEY = "nvapi-...."
+
+llm - >
+
+skillspector scan "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\pdf" --format json  --output "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\reports\Test-Skills-Reports\report-pdf-skill-haikyu-4.5.json" --verbose 
+
+no llm ->
+
+skillspector scan "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\pdf" --no-llm --format json  --output "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\reports\Test-Skills-Reports\report-pdf-skill-haikyu-4.5.json" --verbose 
+
+Generate Baseline - >
+
+skillspector baseline "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\pdf" -o "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\Supperesion\test-baseline.yaml"
+
+Accept Suppression ->
+
+skillspector scan "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\pdf" --baseline "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\Supperesion\test-baseline.yaml" --format json  --output "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\reports\Test-Skills-Reports\report-pdf-skill-haikyu-4.5.json" --verbose 
+
+
+
+
+
+log - 
+2>&1 | Tee-Object "D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\reports\claude-reports-with-logs\haikyu-4.5\pdf\report-pdf-skill-haikyu-4.5.log"
+
+
+
+
+
+D:\gemini-skills\gemini-agent-skills\.gemini\skills\api-documenter
+
+
+Cisco-commands - 
+
+- 
+skill-scanner scan D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\academy-guide --use-behavioral --use-llm --enable-meta --format html --output D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\cisco-skill-scanner\scan-results\academy-guide-with-llm-test-3.html --verbose
+
+- 
+skill-scanner scan D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\skills\academy-guide --use-behavioral --use-llm --enable-meta --format html --output D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\cisco-skill-scanner\scan-results\academy-guide-with-llm-test-3.html --verbose 2>&1 | Tee-object -FilePath D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\cisco-skill-scanner\scan-results\academy-guide-with-llm-test-3.log
+
+- 
+
+$env:SKILL_SCANNER_LLM_MODEL="models/gemini-2.5-flash" 
+$env:SKILL_SCANNER_LLM_API_KEY="AQ.Ab8..."

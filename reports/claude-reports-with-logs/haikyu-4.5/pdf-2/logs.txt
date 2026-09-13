@@ -1,0 +1,148 @@
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: default) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: mcp_least_privilege) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: mcp_rug_pull) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: mcp_tool_poisoning) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: semantic_developer_intent) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: semantic_quality_policy) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: semantic_security_discovery) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+WARNING [skillspector.constants] Model 'claude-haiku-4-5-20251001' (slot: meta_analyzer) not found in model_registry.yaml. Using fallback context length (128000). Token budgeting may be inaccurate — add the model to the registry or verify the model ID.
+Running scan...
+DEBUG [skillspector.cli] Scan started: input_path=D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\pdf, format=json, use_llm=True
+INFO [skillspector.nodes.analyzers.behavioral_ast] behavioral_ast: 0 findings
+DEBUG [skillspector.nodes.analyzers.mcp_least_privilege] mcp_least_privilege: LP3 no permissions declared but capabilities detected
+INFO [skillspector.nodes.analyzers.behavioral_taint_tracking] behavioral_taint_tracking: 0 findings
+INFO [skillspector.nodes.analyzers.mcp_least_privilege] mcp_least_privilege: 1 findings
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP1 produced 0 static findings
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP2 produced 0 static findings
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+INFO [skillspector.nodes.analyzers.static_patterns_agent_snooping] static_patterns_agent_snooping: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+INFO [skillspector.nodes.analyzers.static_patterns_deserialization] static_patterns_deserialization: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_anti_refusal] static_patterns_anti_refusal: 0 findings
+DEBUG [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: RP3 produced 0 static findings
+INFO [skillspector.nodes.analyzers.static_patterns_data_exfiltration] static_patterns_data_exfiltration: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~5793, findings=0)
+INFO [skillspector.nodes.analyzers.static_patterns_harmful_content] static_patterns_harmful_content: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_excessive_agency] static_patterns_excessive_agency: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_memory_poisoning] static_patterns_memory_poisoning: 0 findings
+INFO [skillspector.nodes.analyzers.mcp_rug_pull] mcp_rug_pull: 0 findings in total
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: LICENSE.txt (tokens~1612, findings=0)
+INFO [skillspector.nodes.analyzers.static_patterns_output_handling] static_patterns_output_handling: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_prompt_injection] static_patterns_prompt_injection: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: LICENSE.txt (tokens~1124, findings=0)
+INFO [skillspector.nodes.analyzers.static_patterns_rogue_agent] static_patterns_rogue_agent: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_privilege_escalation] static_patterns_privilege_escalation: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: LICENSE.txt (tokens~1569, findings=0)
+INFO [skillspector.nodes.analyzers.static_patterns_ssrf] static_patterns_ssrf: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3687, findings=0)
+INFO [skillspector.nodes.analyzers.static_patterns_system_prompt_leakage] static_patterns_system_prompt_leakage: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_tool_misuse] static_patterns_tool_misuse: 0 findings
+INFO [skillspector.nodes.analyzers.static_patterns_supply_chain] static_patterns_supply_chain: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3644, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: forms.md (tokens~4611, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: forms.md (tokens~4568, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: reference.md (tokens~6299, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: reference.md (tokens~6256, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_bounding_boxes.py (tokens~1987, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_bounding_boxes.py (tokens~1944, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_fillable_fields.py (tokens~1294, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_fillable_fields.py (tokens~1251, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/convert_pdf_to_images.py (tokens~1506, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/convert_pdf_to_images.py (tokens~1463, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/create_validation_image.py (tokens~1574, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/create_validation_image.py (tokens~1531, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_field_info.py (tokens~2471, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_field_info.py (tokens~2428, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_structure.py (tokens~2372, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_structure.py (tokens~2329, findings=0)
+INFO [skillspector.nodes.analyzers.static_yara] static_yara: compiled 5 YARA rule file(s) (0 skipped)
+INFO [skillspector.nodes.analyzers.static_yara] static_yara: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: LICENSE.txt
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3199, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: LICENSE.txt
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_bounding_boxes.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_fillable_fields.py (tokens~2290, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_pdf_form_with_annotations.py (tokens~2184, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/convert_pdf_to_images.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_bounding_boxes.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_fillable_fields.py (tokens~2247, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: LICENSE.txt
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_pdf_form_with_annotations.py (tokens~2141, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/create_validation_image.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_field_info.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_structure.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: reference.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: forms.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_pdf_form_with_annotations.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: forms.md (tokens~4124, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_structure.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_field_info.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/convert_pdf_to_images.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: forms.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: reference.md (tokens~5812, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_fillable_fields.py
+INFO [skillspector.nodes.analyzers.semantic_developer_intent] semantic_developer_intent: 0 findings
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: reference.md
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_bounding_boxes.py (tokens~1500, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/create_validation_image.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_bounding_boxes.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/check_fillable_fields.py (tokens~806, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: forms.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/check_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/convert_pdf_to_images.py (tokens~1019, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: reference.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/convert_pdf_to_images.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/create_validation_image.py (tokens~1087, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_pdf_form_with_annotations.py
+INFO [skillspector.nodes.analyzers.semantic_quality_policy] semantic_quality_policy: 15 findings
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/create_validation_image.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_field_info.py (tokens~1984, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+INFO [skillspector.nodes.analyzers.mcp_tool_poisoning] mcp_tool_poisoning: 1 findings
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_field_info.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_structure.py (tokens~1885, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_structure.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_fillable_fields.py (tokens~1803, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_pdf_form_with_annotations.py (tokens~1697, findings=0)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_pdf_form_with_annotations.py
+INFO [skillspector.nodes.analyzers.semantic_security_discovery] semantic_security_discovery: 0 findings
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+WARNING [skillspector.model_info] No token-limit info for model 'claude-haiku-4-5-20251001' — using 128000-token default. Add the model to model_registry.yaml.
+DEBUG [skillspector.nodes.meta_analyzer] Meta-analyzer: 9 files -> 9 batches (model=claude-haiku-4-5-20251001)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: SKILL.md (tokens~3044, findings=4)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: forms.md (tokens~3645, findings=2)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: reference.md (tokens~4930, findings=2)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/convert_pdf_to_images.py (tokens~815, findings=1)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/create_validation_image.py (tokens~939, findings=2)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_field_info.py (tokens~1663, findings=1)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/extract_form_structure.py (tokens~1572, findings=1)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_fillable_fields.py (tokens~1599, findings=2)
+DEBUG [skillspector.llm_analyzer_base] LLM call for File: scripts/fill_pdf_form_with_annotations.py (tokens~1468, findings=2)
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_structure.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/extract_form_field_info.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/create_validation_image.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/convert_pdf_to_images.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_fillable_fields.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: scripts/fill_pdf_form_with_annotations.py
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: forms.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: SKILL.md
+DEBUG [skillspector.llm_analyzer_base] LLM response for File: reference.md
+DEBUG [skillspector.nodes.meta_analyzer] LLM filtering done: 17 findings -> 10 after filter
+INFO [skillspector.nodes.deduplicate] Deduplication: 10 → 7 findings (3 duplicates removed)
+DEBUG [skillspector.nodes.report] Report generated: format=json, findings_count=10, suppressed_count=0
+Report saved to: 
+D:\Agent-Skills\skill-test-agent\skills\Nvidia-SkillSpector-Repo\reports\claude-reports-with-logs\haikyu-4.5\pdf-2\report-pdf
+-skill-haikyu-4.5.json

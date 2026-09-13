@@ -1,0 +1,1316 @@
+﻿{
+    "total":  6,
+    "p":  1,
+    "ps":  500,
+    "paging":  {
+                   "pageIndex":  1,
+                   "pageSize":  500,
+                   "total":  6
+               },
+    "effortTotal":  76,
+    "issues":  [
+                   {
+                       "key":  "e2e46844-69d6-44f2-b384-259c5ba0c9a2",
+                       "rule":  "python:S3776",
+                       "severity":  "CRITICAL",
+                       "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                       "project":  "academy-guide",
+                       "line":  15,
+                       "hash":  "b9b8743fce49aa480cd68b0fae4fd949",
+                       "textRange":  {
+                                         "startLine":  15,
+                                         "endLine":  15,
+                                         "startOffset":  4,
+                                         "endOffset":  29
+                                     },
+                       "flows":  [
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  21,
+                                                                                 "endLine":  21,
+                                                                                 "startOffset":  45,
+                                                                                 "endOffset":  47
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  22,
+                                                                                 "endLine":  22,
+                                                                                 "startOffset":  43,
+                                                                                 "endOffset":  45
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  23,
+                                                                                 "endLine":  23,
+                                                                                 "startOffset":  40,
+                                                                                 "endOffset":  42
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  26,
+                                                                                 "endLine":  26,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  31,
+                                                                                 "endLine":  31,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  32,
+                                                                                 "endLine":  32,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  11
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  34,
+                                                                                 "endLine":  34,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  34,
+                                                                                 "endLine":  34,
+                                                                                 "startOffset":  66,
+                                                                                 "endOffset":  69
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  36,
+                                                                                 "endLine":  36,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  38,
+                                                                                 "endLine":  38,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  20
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  40,
+                                                                                 "endLine":  40,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  43,
+                                                                                 "endLine":  43,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  44,
+                                                                                 "endLine":  44,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  47,
+                                                                                 "endLine":  47,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  50,
+                                                                                 "endLine":  50,
+                                                                                 "startOffset":  20,
+                                                                                 "endOffset":  22
+                                                                             },
+                                                               "msg":  "+5 (incl 4 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  54,
+                                                                                 "endLine":  54,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  6
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     }
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Refactor this function to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+                       "effort":  "25min",
+                       "debt":  "25min",
+                       "author":  "",
+                       "tags":  [
+                                    "brain-overload"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "FOCUSED",
+                       "cleanCodeAttributeCategory":  "ADAPTABLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "HIGH"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "57a51d7f-5eb9-4706-9603-ed054fc6a436",
+                       "rule":  "python:S1066",
+                       "severity":  "MAJOR",
+                       "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                       "project":  "academy-guide",
+                       "line":  44,
+                       "hash":  "c8befbde4ffabe7cfb4da961da1f1425",
+                       "textRange":  {
+                                         "startLine":  44,
+                                         "endLine":  44,
+                                         "startOffset":  12,
+                                         "endOffset":  14
+                                     },
+                       "flows":  [
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/check_bounding_boxes.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  43,
+                                                                                 "endLine":  43,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "enclosing",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     }
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Merge this if statement with the enclosing one.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "",
+                       "tags":  [
+                                    "clumsy"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "CLEAR",
+                       "cleanCodeAttributeCategory":  "INTENTIONAL",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "MEDIUM"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "54868fba-a284-4480-a077-32cf19a6f510",
+                       "rule":  "python:S3776",
+                       "severity":  "CRITICAL",
+                       "component":  "academy-guide:scripts/extract_form_field_info.py",
+                       "project":  "academy-guide",
+                       "line":  47,
+                       "hash":  "6cf93050dbf00ea2015aeb62fc2ab2b2",
+                       "textRange":  {
+                                         "startLine":  47,
+                                         "endLine":  47,
+                                         "startOffset":  4,
+                                         "endOffset":  18
+                                     },
+                       "flows":  [
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  53,
+                                                                                 "endLine":  53,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  54,
+                                                                                 "endLine":  54,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  55,
+                                                                                 "endLine":  55,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  63,
+                                                                                 "endLine":  63,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  65,
+                                                                                 "endLine":  65,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  11
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  67,
+                                                                                 "endLine":  67,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  70,
+                                                                                 "endLine":  70,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  16
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  73,
+                                                                                 "endLine":  73,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  22
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  75,
+                                                                                 "endLine":  75,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  77,
+                                                                                 "endLine":  77,
+                                                                                 "startOffset":  20,
+                                                                                 "endOffset":  22
+                                                                             },
+                                                               "msg":  "+5 (incl 4 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  90,
+                                                                                 "endLine":  90,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  91,
+                                                                                 "endLine":  91,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  93,
+                                                                                 "endLine":  93,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  12
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  97,
+                                                                                 "endLine":  97,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  98,
+                                                                                 "endLine":  98,
+                                                                                 "startOffset":  49,
+                                                                                 "endOffset":  51
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  99,
+                                                                                 "endLine":  99,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  12
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_field_info.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  100,
+                                                                                 "endLine":  100,
+                                                                                 "startOffset":  33,
+                                                                                 "endOffset":  35
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     }
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Refactor this function to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+                       "effort":  "25min",
+                       "debt":  "25min",
+                       "author":  "",
+                       "tags":  [
+                                    "brain-overload"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "FOCUSED",
+                       "cleanCodeAttributeCategory":  "ADAPTABLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "HIGH"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "355c8fdd-23c4-4589-8be0-1edf5c0c5817",
+                       "rule":  "python:S3776",
+                       "severity":  "CRITICAL",
+                       "component":  "academy-guide:scripts/extract_form_structure.py",
+                       "project":  "academy-guide",
+                       "line":  20,
+                       "hash":  "0cf04cd8918ef6131e223da16a88ffc6",
+                       "textRange":  {
+                                         "startLine":  20,
+                                         "endLine":  20,
+                                         "startOffset":  4,
+                                         "endOffset":  26
+                                     },
+                       "flows":  [
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  30,
+                                                                                 "endLine":  30,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  11
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  38,
+                                                                                 "endLine":  38,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  15
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  48,
+                                                                                 "endLine":  48,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  15
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  49,
+                                                                                 "endLine":  49,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  57,
+                                                                                 "endLine":  57,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  15
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  60,
+                                                                                 "endLine":  60,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  60,
+                                                                                 "endLine":  60,
+                                                                                 "startOffset":  58,
+                                                                                 "endOffset":  61
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  72,
+                                                                                 "endLine":  72,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  74,
+                                                                                 "endLine":  74,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  78,
+                                                                                 "endLine":  78,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/extract_form_structure.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  80,
+                                                                                 "endLine":  80,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  11
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     }
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Refactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+                       "effort":  "10min",
+                       "debt":  "10min",
+                       "author":  "",
+                       "tags":  [
+                                    "brain-overload"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "FOCUSED",
+                       "cleanCodeAttributeCategory":  "ADAPTABLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "HIGH"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "0875363a-7161-40b6-9603-96e64d11b4e3",
+                       "rule":  "python:S3457",
+                       "severity":  "MAJOR",
+                       "component":  "academy-guide:scripts/extract_form_structure.py",
+                       "project":  "academy-guide",
+                       "line":  105,
+                       "hash":  "ba06be3bb7d4cbd171293d091089963e",
+                       "textRange":  {
+                                         "startLine":  105,
+                                         "endLine":  105,
+                                         "startOffset":  10,
+                                         "endOffset":  19
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Add replacement fields or use a normal string instead of an f-string.",
+                       "effort":  "1min",
+                       "debt":  "1min",
+                       "author":  "",
+                       "tags":  [
+                                    "confusing"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "LOGICAL",
+                       "cleanCodeAttributeCategory":  "INTENTIONAL",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "MEDIUM"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "fabd38d5-df8c-4207-8b09-06aaa88bcf76",
+                       "rule":  "python:S3776",
+                       "severity":  "CRITICAL",
+                       "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                       "project":  "academy-guide",
+                       "line":  11,
+                       "hash":  "13221f8ab668b32a354b122678f74435",
+                       "textRange":  {
+                                         "startLine":  11,
+                                         "endLine":  11,
+                                         "startOffset":  4,
+                                         "endOffset":  19
+                                     },
+                       "flows":  [
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  15,
+                                                                                 "endLine":  15,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  16,
+                                                                                 "endLine":  16,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  19,
+                                                                                 "endLine":  19,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  28,
+                                                                                 "endLine":  28,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  30,
+                                                                                 "endLine":  30,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  10
+                                                                             },
+                                                               "msg":  "+2 (incl 1 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  33,
+                                                                                 "endLine":  33,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  12
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  36,
+                                                                                 "endLine":  36,
+                                                                                 "startOffset":  8,
+                                                                                 "endOffset":  12
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  37,
+                                                                                 "endLine":  37,
+                                                                                 "startOffset":  12,
+                                                                                 "endOffset":  14
+                                                                             },
+                                                               "msg":  "+3 (incl 2 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  39,
+                                                                                 "endLine":  39,
+                                                                                 "startOffset":  16,
+                                                                                 "endOffset":  18
+                                                                             },
+                                                               "msg":  "+4 (incl 3 for nesting)",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  42,
+                                                                                 "endLine":  42,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  6
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     },
+                                     {
+                                         "locations":  [
+                                                           {
+                                                               "component":  "academy-guide:scripts/fill_fillable_fields.py",
+                                                               "textRange":  {
+                                                                                 "startLine":  46,
+                                                                                 "endLine":  46,
+                                                                                 "startOffset":  4,
+                                                                                 "endOffset":  7
+                                                                             },
+                                                               "msg":  "+1",
+                                                               "msgFormattings":  [
+
+                                                                                  ]
+                                                           }
+                                                       ]
+                                     }
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Refactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+                       "effort":  "10min",
+                       "debt":  "10min",
+                       "author":  "",
+                       "tags":  [
+                                    "brain-overload"
+                                ],
+                       "creationDate":  "2026-09-09T10:59:42+0530",
+                       "updateDate":  "2026-09-09T10:59:42+0530",
+                       "type":  "CODE_SMELL",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "FOCUSED",
+                       "cleanCodeAttributeCategory":  "ADAPTABLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "MAINTAINABILITY",
+                                           "severity":  "HIGH"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   }
+               ],
+    "components":  [
+                       {
+                           "key":  "academy-guide",
+                           "enabled":  true,
+                           "qualifier":  "TRK",
+                           "name":  "academy-guide",
+                           "longName":  "academy-guide"
+                       },
+                       {
+                           "key":  "academy-guide:scripts/fill_fillable_fields.py",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "fill_fillable_fields.py",
+                           "longName":  "scripts/fill_fillable_fields.py",
+                           "path":  "scripts/fill_fillable_fields.py"
+                       },
+                       {
+                           "key":  "academy-guide:scripts/check_bounding_boxes.py",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "check_bounding_boxes.py",
+                           "longName":  "scripts/check_bounding_boxes.py",
+                           "path":  "scripts/check_bounding_boxes.py"
+                       },
+                       {
+                           "key":  "academy-guide:scripts/extract_form_field_info.py",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "extract_form_field_info.py",
+                           "longName":  "scripts/extract_form_field_info.py",
+                           "path":  "scripts/extract_form_field_info.py"
+                       },
+                       {
+                           "key":  "academy-guide:scripts/extract_form_structure.py",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "extract_form_structure.py",
+                           "longName":  "scripts/extract_form_structure.py",
+                           "path":  "scripts/extract_form_structure.py"
+                       }
+                   ],
+    "facets":  [
+
+               ]
+}
